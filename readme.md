@@ -10,7 +10,7 @@
  - 理论支持: Windows XP(SP3)+
  
 ## Download
- - [Timing.rar](/Timing/bin/Debug/Timing.rar)
+ - [Timing.rar](https://github.com/xCss/Timing/releases/download/v1.0.0/Timing.rar)
 
 ## :warning: 请注意
  - 如果`config.xml`文件中的`url`里有`&`符号，请替换成`&#038;`
