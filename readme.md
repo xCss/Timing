@@ -3,6 +3,12 @@
 
 ![xxx](https://ws2.sinaimg.cn/large/6dcfd1b8gw1f812hj1hzoj20fk084gmx.jpg)
 
+## Description
+ - 实现自定义配置请求路径、间隔、是否执行=>文件`config.xml`
+ - 实现启动、暂停执行
+ - 实现显示最后执行时间
+ - 实现动态修改、删除，并可保存列表文件
+
 ## Development Tools
  - [Visual Studio 2012](https://www.visualstudio.com)
  - Base on [.Net FrameWrok 2.0](https://www.microsoft.com/en-us/download/details.aspx?id=1639)
