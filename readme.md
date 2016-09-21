@@ -7,7 +7,7 @@
 
 ## Support System
  - 测试机型: Windows 10.0 x64 (10240)
- - 理论支持: Windows XP(SP3)+
+ - 理论支持: Windows XP(SP3)+ `(any cpu)`
  
 ## Download
  - [Timing.rar](https://github.com/xCss/Timing/releases/download/v1.0.0/Timing.rar)
