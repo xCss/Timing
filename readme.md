@@ -3,7 +3,7 @@
 
 ## Development Tools
  - [Visual Studio 2012](https://www.visualstudio.com)
- - Base on [.NetFrameWrok2.0](https://www.microsoft.com/en-us/download/details.aspx?id=1639)
+ - Base on [.Net FrameWrok 2.0](https://www.microsoft.com/en-us/download/details.aspx?id=1639)
 
 ## Support System
  - 测试机型: Windows 10.0 x64 (10240)
@@ -12,7 +12,7 @@
 ## Download
  - [Timing.rar](/Timing/bin/Debug/Timing.rar)
 
-## :warning:
+## :warning: 请注意
  - 如果`config.xml`文件中的`url`里有`&`符号，请替换成`&#038;`
  
 ## config.xml
@@ -26,7 +26,7 @@
     <interval>1</interval>
     <!-- 是否请求(可选：默认true) -->
 	<status>true</status>
-    <!-- 最后执行时间(readonly) -->
+    <!-- 最后执行时间(可选,readonly) -->
 	<lasttime></lasttime>
   </link>
   <link>
@@ -36,7 +36,7 @@
     <interval>1</interval>
     <!-- 是否请求(可选：默认true) -->
 	<status>true</status>
-    <!-- 最后执行时间(readonly) -->
+    <!-- 最后执行时间(可选,readonly) -->
 	<lasttime></lasttime>
   </link>
 </links>
