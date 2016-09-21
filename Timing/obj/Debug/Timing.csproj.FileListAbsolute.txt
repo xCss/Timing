@@ -1,0 +1,7 @@
+C:\Users\xiove\documents\visual studio 2012\Projects\Timing\Timing\bin\Debug\定时任务小工具.exe
+C:\Users\xiove\documents\visual studio 2012\Projects\Timing\Timing\bin\Debug\定时任务小工具.pdb
+C:\Users\xiove\documents\visual studio 2012\Projects\Timing\Timing\obj\Debug\Timing.MainForm.resources
+C:\Users\xiove\documents\visual studio 2012\Projects\Timing\Timing\obj\Debug\Timing.Properties.Resources.resources
+C:\Users\xiove\documents\visual studio 2012\Projects\Timing\Timing\obj\Debug\Timing.csproj.GenerateResource.Cache
+C:\Users\xiove\documents\visual studio 2012\Projects\Timing\Timing\obj\Debug\定时任务小工具.exe
+C:\Users\xiove\documents\visual studio 2012\Projects\Timing\Timing\obj\Debug\定时任务小工具.pdb
