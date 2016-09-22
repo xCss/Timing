@@ -58,6 +58,8 @@ namespace Timing
         {
             timer.Stop();
             timer.Close();
+            timer = null;
+
             this.btnStart.Enabled = true;
             this.btnStop.Enabled = false;
         }
