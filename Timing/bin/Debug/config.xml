@@ -1,21 +1,19 @@
 <?xml version="1.0" standalone="no"?>
 <links>
   <link>
-    <url>https://bird.ioliu.cn/netease/?id=222222</url>
-    <interval>1</interval>
+    <url>https://bird.ioliu.cn/joke</url>
+    <interval>5</interval>
     <status>True</status>
-    <lasttime>0000-00-00 00:00:00</lasttime>
+    <lasttime>2016-09-22 17:26:38</lasttime>
+    <method>POST</method>
+    <postdata>{"pagesize":"3"}</postdata>
   </link>
   <link>
-    <url>https://icp.haomwei.com</url>
-    <interval>1</interval>
+    <url>https://bird.ioliu.cn/joke</url>
+    <interval>3</interval>
     <status>True</status>
-    <lasttime>0000-00-00 00:00:00</lasttime>
-  </link>
-  <link>
-    <url>https://baidu.com</url>
-    <interval>1</interval>
-    <status>True</status>
-    <lasttime>2016-09-22 12:07:19</lasttime>
+    <lasttime>2016-09-22 17:26:38</lasttime>
+    <method>GET</method>
+    <postdata />
   </link>
 </links>

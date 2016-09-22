@@ -9,9 +9,9 @@ using System.Resources;
 [assembly: AssemblyTitle("定时任务")]
 [assembly: AssemblyDescription("定时任务")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("xioveliu@gmail.com")]
+[assembly: AssemblyCompany("<xioveliu@gmail.com>")]
 [assembly: AssemblyProduct("Timing")]
-[assembly: AssemblyCopyright("Copyright © 2016. Hero")]
+[assembly: AssemblyCopyright("Copyright © 2016. Hero https://github.com/xCss/Timing")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -35,4 +35,4 @@ using System.Resources;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: NeutralResourcesLanguageAttribute("zh-Hans")]
+[assembly: NeutralResourcesLanguageAttribute("")]

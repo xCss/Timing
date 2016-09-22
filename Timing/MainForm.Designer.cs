@@ -39,11 +39,13 @@
             this.Interval = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
-            this.Lasttime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.timingEntityBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.urlDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Method = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Postdata = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.intervalDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.timingEntityBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.Lasttime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTiming)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.timingEntityBindingSource)).BeginInit();
@@ -53,7 +55,7 @@
             // 
             this.btnStart.Enabled = false;
             this.btnStart.Font = new System.Drawing.Font("宋体", 9F);
-            this.btnStart.Location = new System.Drawing.Point(442, 206);
+            this.btnStart.Location = new System.Drawing.Point(576, 206);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(87, 36);
             this.btnStart.TabIndex = 5;
@@ -66,7 +68,7 @@
             this.groupBox1.Controls.Add(this.dgvTiming);
             this.groupBox1.Location = new System.Drawing.Point(13, 13);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(519, 187);
+            this.groupBox1.Size = new System.Drawing.Size(653, 187);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "执行列表";
@@ -81,6 +83,8 @@
             this.dgvTiming.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvTiming.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.urlDataGridViewTextBoxColumn,
+            this.Method,
+            this.Postdata,
             this.intervalDataGridViewTextBoxColumn,
             this.statusDataGridViewCheckBoxColumn,
             this.Lasttime});
@@ -104,7 +108,7 @@
             this.dgvTiming.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvTiming.RowTemplate.Height = 23;
             this.dgvTiming.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvTiming.Size = new System.Drawing.Size(513, 167);
+            this.dgvTiming.Size = new System.Drawing.Size(647, 167);
             this.dgvTiming.TabIndex = 0;
             // 
             // btnLoad
@@ -151,7 +155,7 @@
             // 
             this.btnStop.Enabled = false;
             this.btnStop.Font = new System.Drawing.Font("宋体", 9F);
-            this.btnStop.Location = new System.Drawing.Point(323, 206);
+            this.btnStop.Location = new System.Drawing.Point(456, 206);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(87, 36);
             this.btnStop.TabIndex = 8;
@@ -159,13 +163,9 @@
             this.btnStop.UseVisualStyleBackColor = true;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
-            // Lasttime
+            // timingEntityBindingSource
             // 
-            this.Lasttime.DataPropertyName = "Lasttime";
-            this.Lasttime.HeaderText = "最后执行时间";
-            this.Lasttime.Name = "Lasttime";
-            this.Lasttime.ReadOnly = true;
-            this.Lasttime.Width = 150;
+            this.timingEntityBindingSource.DataSource = typeof(Timing.TimingEntity);
             // 
             // urlDataGridViewTextBoxColumn
             // 
@@ -173,6 +173,19 @@
             this.urlDataGridViewTextBoxColumn.HeaderText = "请求链接";
             this.urlDataGridViewTextBoxColumn.Name = "urlDataGridViewTextBoxColumn";
             this.urlDataGridViewTextBoxColumn.Width = 150;
+            // 
+            // Method
+            // 
+            this.Method.DataPropertyName = "Method";
+            this.Method.HeaderText = "请求方式";
+            this.Method.Name = "Method";
+            this.Method.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Postdata
+            // 
+            this.Postdata.DataPropertyName = "Postdata";
+            this.Postdata.HeaderText = "请求数据(POST)";
+            this.Postdata.Name = "Postdata";
             // 
             // intervalDataGridViewTextBoxColumn
             // 
@@ -188,15 +201,19 @@
             this.statusDataGridViewCheckBoxColumn.Name = "statusDataGridViewCheckBoxColumn";
             this.statusDataGridViewCheckBoxColumn.TrueValue = "true";
             // 
-            // timingEntityBindingSource
+            // Lasttime
             // 
-            this.timingEntityBindingSource.DataSource = typeof(Timing.TimingEntity);
+            this.Lasttime.DataPropertyName = "Lasttime";
+            this.Lasttime.HeaderText = "最后执行时间";
+            this.Lasttime.Name = "Lasttime";
+            this.Lasttime.ReadOnly = true;
+            this.Lasttime.Width = 200;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(544, 253);
+            this.ClientSize = new System.Drawing.Size(678, 253);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnLoad);
@@ -227,6 +244,8 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.DataGridViewTextBoxColumn urlDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Method;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Postdata;
         private System.Windows.Forms.DataGridViewTextBoxColumn intervalDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn statusDataGridViewCheckBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Lasttime;

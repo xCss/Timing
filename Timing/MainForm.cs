@@ -66,34 +66,63 @@ namespace Timing
 
         //执行请求
         public void doRequest(object sender,System.Timers.ElapsedEventArgs e) {
-            //MessageBox.Show(time.ToString(),"温馨提醒");
             seconds++;
             foreach (var entity in list)
             {
+                if (entity.Interval == -1) {
+                    continue;
+                }
                 if (seconds % entity.Interval == 0 && entity.Status)
                 {
-                    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(entity.Url);
-                    request.Method = "get";
-                    request.Accept = "application/json";
-                    request.ContentType = "application/json; charset=utf-8";
-                    //byte[] buffer = Encoding.ASCII.GetBytes(strPostdata);
-                    //request.ContentLength = buffer.Length;
-                    //request.GetRequestStream().Write(buffer, 0, buffer.Length);
-                    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                    //MessageBox.Show((seconds % entity.Interval == 0 && entity.Status) + entity.Url);
-                    //判断编码格式
-                    string encoding = response.ContentEncoding;
-                    if (encoding == null || encoding.Length < 1) {
-                        encoding = "UTF-8";
+                    try{
+                        httpRequest(entity);
+                        entity.Lasttime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+                    }catch (WebException we){
+
+                        entity.Status = false;
+                        entity.Lasttime = we.Message;
+                        continue;
+                    }finally{
+                        this.dgvTiming.Refresh();
+                        var k = list.FindIndex(v1=>v1==entity);
+                        list[k] = entity;
                     }
-                    var responseString = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding(encoding)).ReadToEnd();
-                    //MessageBox.Show(responseString, "温馨提醒");
-                    response.Close();
-                    entity.Lasttime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                    this.dgvTiming.Refresh();
-                    //list.Add(entity);
                 }
             }
+        }
+
+        /// <summary>
+        /// 封装请求
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        private static string httpRequest(TimingEntity entity) {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(entity.Url);
+            request.Method = entity.Method;
+            request.Accept = "application/json";
+            request.ContentType = "application/json; charset=utf-8";
+            if (entity.Method.ToUpper() == "POST"){
+                byte[] buffer = Encoding.ASCII.GetBytes(entity.Postdata);
+                request.ContentLength = buffer.Length;
+                request.GetRequestStream().Write(buffer, 0, buffer.Length);
+            }
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            //判断编码格式
+            string encoding = response.ContentEncoding;
+            if (encoding == null || encoding.Length < 1)
+            {
+                encoding = "UTF-8";
+            }
+            Stream stream = response.GetResponseStream();
+            StreamReader reader = new StreamReader(stream, Encoding.GetEncoding(encoding));
+            var responseString = reader.ReadToEnd();
+            reader.Close();
+            reader.Dispose();
+            stream.Close();
+            stream.Dispose();
+            response.Close();
+            return responseString;
         }
 
 
@@ -111,47 +140,8 @@ namespace Timing
             dialog.FilterIndex = 1;
             if (dialog.ShowDialog() == DialogResult.OK) {
                 XMLconfig = dialog.FileName;
-                //MessageBox.Show(XMLconfig);
+                loadConfig();
 
-                XmlTextReader reader = new XmlTextReader(@XMLconfig);
-
-                TimingEntity entity = new TimingEntity();
-                //读取xml
-                while (reader.Read()){
-                    if (reader.NodeType == XmlNodeType.Element) {
-                        if (reader.Name == "url") {
-                            entity.Url = reader.ReadElementString().Trim();
-                            MessageBox.Show(entity.Url);
-                        }
-                        if (reader.Name == "interval") {
-                            entity.Interval = Convert.ToInt32(reader.ReadElementString().Trim());
-                        }
-                        if (reader.Name == "status") {
-                            entity.Status = Convert.ToBoolean(reader.ReadElementString().Trim());
-                        }
-                        if (reader.Name == "lasttime") {
-                            entity.Lasttime = reader.ReadElementString().Trim();
-                        }
-                    }
-                    if (reader.NodeType == XmlNodeType.EndElement) {
-                        list.Add(entity);
-                        entity = new TimingEntity();
-                    }
-                }
-                list.RemoveAt(list.Count - 1);
-                BindingSource bindsource = new BindingSource();
-                bindsource.DataSource = list;
-                this.dgvTiming.DataSource = bindsource;
-                this.dgvTiming.AllowUserToAddRows = true;
-                this.dgvTiming.AllowUserToDeleteRows = true;
-
-                reader.Close();
-
-            }
-
-            if (list.Count > 0) {
-                this.btnSave.Enabled = true;
-                this.btnStart.Enabled = true;
             }
         }
 
@@ -168,8 +158,7 @@ namespace Timing
                 {
                     if (reader.Name == "url")
                     {
-                        //entity.Url = reader.ReadElementString().Trim();
-                        entity.Url = reader.ReadElementContentAsString();
+                        entity.Url = reader.ReadElementString().Trim();
                     }
                     if (reader.Name == "interval")
                     {
@@ -182,6 +171,12 @@ namespace Timing
                     if (reader.Name == "lasttime")
                     {
                         entity.Lasttime = reader.ReadElementString().Trim();
+                    }     
+                    if (reader.Name == "method") {
+                        entity.Method = reader.ReadElementString().Trim();
+                    }
+                    if (reader.Name == "postdata") {
+                        entity.Postdata = reader.ReadElementString().Trim();
                     }
                 }
                 if (reader.NodeType == XmlNodeType.EndElement)
@@ -230,6 +225,8 @@ namespace Timing
                 writer.WriteElementString("interval", entity.Interval.ToString());
                 writer.WriteElementString("status", entity.Status.ToString());
                 writer.WriteElementString("lasttime", entity.Lasttime);
+                writer.WriteElementString("method", entity.Method);
+                writer.WriteElementString("postdata", entity.Postdata);
                 //子元素结束
                 writer.WriteEndElement();
             }

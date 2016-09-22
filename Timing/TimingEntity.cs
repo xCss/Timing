@@ -9,11 +9,21 @@ namespace Timing
         //链接地址
         private string url;
         //执行间隔
-        private int interval;
+        private int interval = -1;
         //执行状态(默认true)
         private bool status = true;
         //最后执行时间
         private string lasttime = "0000-00-00 00:00:00";
+        //请求方式(default:GET)
+        private string method = "GET";
+        //请求参数 key=val&k=v
+        private string postdata;
+
+        public string Postdata
+        {
+            get { return postdata; }
+            set { postdata = value; }
+        }
 
         public TimingEntity() { }
         public TimingEntity(string url,int interval){
@@ -44,6 +54,12 @@ namespace Timing
             get { return lasttime; }
             set { lasttime = value; }
         }
+        public string Method
+        {
+            get { return method; }
+            set { method = (value.ToUpper() == "POST" ? "POST" : "GET"); }
+        }
+
 
     }
 }
