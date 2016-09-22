@@ -68,15 +68,30 @@ namespace Timing
         public void doRequest(object sender,System.Timers.ElapsedEventArgs e) {
             //MessageBox.Show(time.ToString(),"温馨提醒");
             seconds++;
-            foreach (var entity in list){
-                if (seconds % entity.Interval == 0 && entity.Status){
-                    var request = (HttpWebRequest)WebRequest.Create(entity.Url);
-                    var response = (HttpWebResponse)request.GetResponse();
-                    var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
-                    entity.Lasttime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+            foreach (var entity in list)
+            {
+                if (seconds % entity.Interval == 0 && entity.Status)
+                {
+                    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(entity.Url);
+                    request.Method = "get";
+                    request.Accept = "application/json";
+                    request.ContentType = "application/json; charset=utf-8";
+                    //byte[] buffer = Encoding.ASCII.GetBytes(strPostdata);
+                    //request.ContentLength = buffer.Length;
+                    //request.GetRequestStream().Write(buffer, 0, buffer.Length);
+                    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                    //MessageBox.Show((seconds % entity.Interval == 0 && entity.Status) + entity.Url);
+                    //判断编码格式
+                    string encoding = response.ContentEncoding;
+                    if (encoding == null || encoding.Length < 1) {
+                        encoding = "UTF-8";
+                    }
+                    var responseString = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding(encoding)).ReadToEnd();
+                    //MessageBox.Show(responseString, "温馨提醒");
+                    response.Close();
+                    entity.Lasttime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                     this.dgvTiming.Refresh();
                     //list.Add(entity);
-                    //MessageBox.Show(responseString, "温馨提醒");
                 }
             }
         }
